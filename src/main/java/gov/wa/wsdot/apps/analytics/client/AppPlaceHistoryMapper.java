@@ -17,36 +17,12 @@
  */
 package gov.wa.wsdot.apps.analytics.client;
 
-import com.google.gwt.place.shared.Place;
 import com.google.gwt.place.shared.PlaceHistoryMapper;
+import com.google.gwt.place.shared.WithTokenizers;
 import gov.wa.wsdot.apps.analytics.client.activities.twitter.home.TwitterPlace;
 import gov.wa.wsdot.apps.analytics.client.activities.twitter.search.TwitterSearchPlace;
 
-public class AppPlaceHistoryMapper implements PlaceHistoryMapper {
 
-    @Override
-    public Place getPlace(String token) {
-        // parse tokens and create Places here
-        if (token.equals("TwitterHome")){
-            return new TwitterPlace((token));
-        }
-        if (token.equals("TwitterSearch")){
-            return new TwitterSearchPlace(token);
-        }
-        return new TwitterPlace(token);
-    }
-
-    @Override
-    public String getToken(Place place) {
-        // examine Places and compose tokens here
-        if (place instanceof TwitterPlace){
-            return "TwitterHome";
-        }
-
-        if (place instanceof TwitterSearchPlace){
-            return "TwitterSearch";
-        }
-
-        return "";
-    }
+@WithTokenizers({TwitterPlace.TwitterPlaceTokenizer.class, TwitterSearchPlace.SearchPlaceTokenizer.class})
+public interface AppPlaceHistoryMapper extends PlaceHistoryMapper {
 }

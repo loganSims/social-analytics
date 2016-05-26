@@ -68,12 +68,12 @@ public class NavView extends Composite{
     @UiHandler("home")
     public void onHomeClick(ClickEvent e){
 
-        clientFactory.getPlaceController().goTo(new TwitterPlace(""));
+        clientFactory.getPlaceController().goTo(new TwitterPlace("main"));
     }
 
     @UiHandler("search")
     public void onSearchClick(ClickEvent e){
-        clientFactory.getPlaceController().goTo(new TwitterSearchPlace(""));
+        clientFactory.getPlaceController().goTo(new TwitterSearchPlace("main"));
     }
 
 }
