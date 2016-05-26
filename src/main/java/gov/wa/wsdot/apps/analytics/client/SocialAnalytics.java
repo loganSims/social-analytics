@@ -27,14 +27,14 @@ import com.google.gwt.place.shared.PlaceController;
 import com.google.gwt.place.shared.PlaceHistoryHandler;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.SimplePanel;
-import gov.wa.wsdot.apps.analytics.client.activities.twitter.AnalyticsPlace;
+import gov.wa.wsdot.apps.analytics.client.activities.twitter.home.TwitterPlace;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
  */
 public class SocialAnalytics implements EntryPoint {
 
-  private Place defaultPlace = new AnalyticsPlace("twitter");
+  private Place defaultPlace = new TwitterPlace("");
   private SimplePanel appWidget = new SimplePanel();
 
   @Override

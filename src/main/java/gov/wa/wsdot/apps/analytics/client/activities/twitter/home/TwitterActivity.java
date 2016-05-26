@@ -16,7 +16,7 @@
  *
  */
 
-package gov.wa.wsdot.apps.analytics.client.activities.twitter;
+package gov.wa.wsdot.apps.analytics.client.activities.twitter.home;
 
 import com.google.gwt.activity.shared.AbstractActivity;
 import com.google.gwt.event.shared.EventBus;
@@ -31,21 +31,21 @@ import java.util.Date;
 /**
  *  Main twitter analytics activity
  */
-public class AnalyticsActivity extends AbstractActivity implements AnalyticsView.Presenter {
+public class TwitterActivity extends AbstractActivity implements TwitterView.Presenter {
 
     private final ClientFactory clientFactory;
     private String name;
 
-    private AnalyticsView view;
+    private TwitterView view;
 
-    public AnalyticsActivity(AnalyticsPlace place, ClientFactory clientFactory) {
-        this.name = place.getAnalyticsName();
+    public TwitterActivity(TwitterPlace place, ClientFactory clientFactory) {
+        this.name = place.getTwitterName();
         this.clientFactory = clientFactory;
     }
 
     @Override
     public void start(AcceptsOneWidget panel, EventBus eventBus) {
-        view = clientFactory.getAnalyticsView();
+        view = clientFactory.getTwitterView();
         view.setPresenter(this);
         panel.setWidget(view.asWidget());
 
@@ -73,7 +73,5 @@ public class AnalyticsActivity extends AbstractActivity implements AnalyticsView
     public EventBus getEventBus() {
         return clientFactory.getEventBus();
     }
-
-
 
 }

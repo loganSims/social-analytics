@@ -15,14 +15,14 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  *
  */
-package gov.wa.wsdot.apps.analytics.client.activities.twitter;
+package gov.wa.wsdot.apps.analytics.client.activities.twitter.home;
 
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.ui.IsWidget;
 
 import java.util.Date;
 
-public interface AnalyticsView extends IsWidget {
+public interface TwitterView extends IsWidget {
 
     void setPresenter(Presenter presenter);
 

@@ -20,15 +20,18 @@ package gov.wa.wsdot.apps.analytics.client;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.event.shared.SimpleEventBus;
 import com.google.gwt.place.shared.PlaceController;
-import gov.wa.wsdot.apps.analytics.client.activities.twitter.AnalyticsView;
-import gov.wa.wsdot.apps.analytics.client.activities.twitter.AnalyticsViewImpl;
+import gov.wa.wsdot.apps.analytics.client.activities.twitter.home.TwitterView;
+import gov.wa.wsdot.apps.analytics.client.activities.twitter.home.TwitterViewImpl;
+import gov.wa.wsdot.apps.analytics.client.activities.twitter.search.TwitterSearchView;
+import gov.wa.wsdot.apps.analytics.client.activities.twitter.search.TwitterSearchViewImpl;
 
 
 public class ClientFactoryImpl implements ClientFactory {
 
     private final EventBus eventBus = new SimpleEventBus();
     private final PlaceController placeController = new PlaceController(eventBus);
-    private final AnalyticsView analyticsView = new AnalyticsViewImpl(this);
+    private final TwitterView twitterView = new TwitterViewImpl(this);
+    private final TwitterSearchView twitterSearchView = new TwitterSearchViewImpl(this);
 
     public EventBus getEventBus() {
         return eventBus;
@@ -38,7 +41,11 @@ public class ClientFactoryImpl implements ClientFactory {
         return placeController;
     }
 
-    public AnalyticsView getAnalyticsView() {
-        return analyticsView;
+    public TwitterView getTwitterView() {
+        return twitterView;
+    }
+
+    public TwitterSearchView getTwitterSearchView() {
+        return twitterSearchView;
     }
 }

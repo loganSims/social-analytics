@@ -15,7 +15,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  *
  */
-package gov.wa.wsdot.apps.analytics.client.activities.twitter;
+package gov.wa.wsdot.apps.analytics.client.activities.twitter.home;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -32,6 +32,7 @@ import com.google.gwt.user.client.ui.Widget;
 import com.google.web.bindery.event.shared.binder.EventBinder;
 import com.google.web.bindery.event.shared.binder.EventHandler;
 import gov.wa.wsdot.apps.analytics.client.ClientFactory;
+import gov.wa.wsdot.apps.analytics.client.activities.coreViews.navigation.NavView;
 import gov.wa.wsdot.apps.analytics.client.activities.events.SetDateEvent;
 import gov.wa.wsdot.apps.analytics.client.activities.twitter.view.ranking.RankingView;
 import gov.wa.wsdot.apps.analytics.client.activities.twitter.view.search.SearchView;
@@ -39,29 +40,22 @@ import gov.wa.wsdot.apps.analytics.client.activities.twitter.view.sentiment.Sent
 import gov.wa.wsdot.apps.analytics.client.activities.twitter.view.sources.SourcesPieChart;
 import gov.wa.wsdot.apps.analytics.client.activities.twitter.view.summary.SummaryChart;
 import gov.wa.wsdot.apps.analytics.client.activities.twitter.view.tweets.TweetsView;
-import gov.wa.wsdot.apps.analytics.client.resources.Resources;
 import gov.wa.wsdot.apps.analytics.shared.TweetTimes;
 import gov.wa.wsdot.apps.analytics.util.Consts;
 import gwt.material.design.client.ui.*;
 
 import java.util.Date;
 
-public class AnalyticsViewImpl extends Composite implements AnalyticsView{
+public class TwitterViewImpl extends Composite implements TwitterView {
 
-    interface MyEventBinder extends EventBinder<AnalyticsViewImpl> {}
+    interface MyEventBinder extends EventBinder<TwitterViewImpl> {}
     private final MyEventBinder eventBinder = GWT.create(MyEventBinder.class);
 
-    private static AnalyticsViewImplUiBinder uiBinder = GWT
-            .create(AnalyticsViewImplUiBinder.class);
+    private static TwitterViewImplUiBinder uiBinder = GWT
+            .create(TwitterViewImplUiBinder.class);
 
-    interface AnalyticsViewImplUiBinder extends UiBinder<Widget, AnalyticsViewImpl> {
+    interface TwitterViewImplUiBinder extends UiBinder<Widget, TwitterViewImpl> {
     }
-
-    @UiField
-    MaterialNavBar navBar;
-
-    @UiField
-    MaterialImage logo;
 
     @UiField
     MaterialDatePicker dpStart;
@@ -74,6 +68,9 @@ public class AnalyticsViewImpl extends Composite implements AnalyticsView{
 
     @UiField
     MaterialButton submitDateButton;
+
+    @UiField(provided = true)
+    NavView nav;
 
     @UiField(provided = true)
     SummaryChart summaryChart;
@@ -109,9 +106,11 @@ public class AnalyticsViewImpl extends Composite implements AnalyticsView{
 
     private Presenter presenter;
 
-    public AnalyticsViewImpl(ClientFactory clientFactory) {
+    public TwitterViewImpl(ClientFactory clientFactory) {
 
         eventBinder.bindEventHandlers(this, clientFactory.getEventBus());
+
+        nav = new NavView(clientFactory);
 
         tweets = new TweetsView(clientFactory);
         searchResults = new SearchView(clientFactory);
@@ -121,8 +120,6 @@ public class AnalyticsViewImpl extends Composite implements AnalyticsView{
         ranking = new RankingView(clientFactory);
 
         initWidget(uiBinder.createAndBindUi(this));
-        logo.setResource(Resources.INSTANCE.tacronymWhiteLogoPNG());
-        logo.addStyleName(Resources.INSTANCE.css().logo());
 
         accountPicker.setItemSelected(4, true);
         getStartDate();

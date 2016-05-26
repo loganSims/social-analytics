@@ -20,8 +20,10 @@ package gov.wa.wsdot.apps.analytics.client;
 import com.google.gwt.activity.shared.Activity;
 import com.google.gwt.activity.shared.ActivityMapper;
 import com.google.gwt.place.shared.Place;
-import gov.wa.wsdot.apps.analytics.client.activities.twitter.AnalyticsActivity;
-import gov.wa.wsdot.apps.analytics.client.activities.twitter.AnalyticsPlace;
+import gov.wa.wsdot.apps.analytics.client.activities.twitter.home.TwitterActivity;
+import gov.wa.wsdot.apps.analytics.client.activities.twitter.home.TwitterPlace;
+import gov.wa.wsdot.apps.analytics.client.activities.twitter.search.TwitterSearchActivity;
+import gov.wa.wsdot.apps.analytics.client.activities.twitter.search.TwitterSearchPlace;
 
 public class AppActivityMapper implements ActivityMapper {
     private ClientFactory clientFactory;
@@ -33,8 +35,11 @@ public class AppActivityMapper implements ActivityMapper {
 
     @Override
     public Activity getActivity(Place place) {
-        if (place instanceof AnalyticsPlace)
-            return new AnalyticsActivity((AnalyticsPlace) place, clientFactory);
+        if (place instanceof TwitterPlace)
+            return new TwitterActivity((TwitterPlace) place, clientFactory);
+        if (place instanceof TwitterSearchPlace)
+            return new TwitterSearchActivity((TwitterSearchPlace) place, clientFactory);
+
         return null;
     }
 }

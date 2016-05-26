@@ -8,15 +8,14 @@
              xmlns:views.tweets="urn:import:gov.wa.wsdot.apps.analytics.client.activities.twitter.view.tweets"
              xmlns:views.sources="urn:import:gov.wa.wsdot.apps.analytics.client.activities.twitter.view.sources"
              xmlns:views.search="urn:import:gov.wa.wsdot.apps.analytics.client.activities.twitter.view.search"
-             xmlns:views.ranking="urn:import:gov.wa.wsdot.apps.analytics.client.activities.twitter.view.ranking">
+             xmlns:views.ranking="urn:import:gov.wa.wsdot.apps.analytics.client.activities.twitter.view.ranking"
+             xmlns:core.nav="urn:import:gov.wa.wsdot.apps.analytics.client.activities.coreViews.navigation">
 
     <ui:with field="res" type="gov.wa.wsdot.apps.analytics.client.resources.Resources" />
 
     <g:HTMLPanel>
 
-        <m:MaterialNavBar ui:field="navBar" backgroundColor="teal lighten-2" width="100%" type="FIXED" >
-            <m:MaterialImage ui:field="logo"/>
-        </m:MaterialNavBar>
+        <core.nav:NavView ui:field="nav"/>
 
             <div style="padding: 30px;">
 

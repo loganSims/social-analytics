@@ -15,33 +15,34 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  *
  */
-package gov.wa.wsdot.apps.analytics.client.activities.twitter;
+package gov.wa.wsdot.apps.analytics.client.activities.twitter.home;
 
 import com.google.gwt.place.shared.Place;
 import com.google.gwt.place.shared.PlaceTokenizer;
+import com.google.gwt.place.shared.Prefix;
 
+public class TwitterPlace extends Place {
+    private String TwitterName;
 
-public class AnalyticsPlace extends Place {
-    private String AnalyticsName;
-
-    public AnalyticsPlace(String token) {
-        this.AnalyticsName = token;
+    public TwitterPlace(String token) {
+        this.TwitterName = token;
     }
 
-    public String getAnalyticsName() {
-        return AnalyticsName;
+    public String getTwitterName() {
+        return TwitterName;
     }
 
-    public static class AnalyticsPlaceTokenizer implements PlaceTokenizer<AnalyticsPlace> {
+    @Prefix("TwitterHome")
+    public static class TwitterPlaceTokenizer implements PlaceTokenizer<TwitterPlace> {
 
         @Override
-        public String getToken(AnalyticsPlace place) {
-            return place.getAnalyticsName();
+        public String getToken(TwitterPlace place) {
+            return place.getTwitterName();
         }
 
         @Override
-        public AnalyticsPlace getPlace(String token) {
-            return new AnalyticsPlace(token);
+        public TwitterPlace getPlace(String token) {
+            return new TwitterPlace(token);
         }
     }
 }
