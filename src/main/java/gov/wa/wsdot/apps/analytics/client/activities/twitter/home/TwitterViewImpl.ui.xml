@@ -71,17 +71,10 @@
                                     <m:MaterialTabItem waves="LIGHT" grid="s4">
                                         <m:MaterialLink ui:field="mentionsTab" text="Mentions" href="#mentions" textColor="white"/>
                                     </m:MaterialTabItem>
-                                    <m:MaterialTabItem waves="LIGHT" grid="s4">
-                                        <m:MaterialLink ui:field="searchTab" text="Search" href="#search" textColor="white"/>
-                                    </m:MaterialTabItem>
                                 </m:MaterialTab>
                             </m:MaterialColumn>
-
                             <m:MaterialColumn  m:id="mentions" grid="s12">
                                 <views.tweets:TweetsView ui:field="tweets"/>
-                            </m:MaterialColumn>
-                            <m:MaterialColumn  m:id="search" grid="s12">
-                                <views.search:SearchView ui:field="searchResults"/>
                             </m:MaterialColumn>
                         </m:MaterialRow>
                     </m:MaterialColumn>

@@ -5,13 +5,12 @@
              xmlns:m.html="urn:import:gwt.material.design.client.ui.html">
 
 <g:HTMLPanel>
-    <m:MaterialNavBar ui:field="navBar" backgroundColor="teal lighten-2" width="100%" type="FIXED" activates="sidebar">
+    <m:MaterialNavBar ui:field="navBar" backgroundColor="teal lighten-2" width="100%" type="FIXED">
         <m:MaterialImage ui:field="logo"/>
+        <m:MaterialNavSection float="RIGHT">
+            <m:MaterialLink ui:field="home" iconType="HOME" iconPosition="LEFT" textColor="white" text="Dashboard" />
+            <m:MaterialLink ui:field="search" iconType="SEARCH" iconPosition="LEFT" textColor="white" text="Search" />
+        </m:MaterialNavSection>
     </m:MaterialNavBar>
-    <m:MaterialSideNav width="300" m:id="sidebar" type="CLIP" closeOnClick="true">
-        <m:MaterialNavBrand>Twitter Analytics</m:MaterialNavBrand>
-        <m:MaterialLink ui:field="home" iconType="HOME" iconPosition="LEFT" textColor="grey" text="Dashboard" />
-        <m:MaterialLink ui:field="search" iconType="SEARCH" iconPosition="LEFT" textColor="grey" text="Search" />
-    </m:MaterialSideNav>
 </g:HTMLPanel>
 </ui:UiBinder>

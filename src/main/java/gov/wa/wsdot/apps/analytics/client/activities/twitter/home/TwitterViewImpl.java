@@ -31,7 +31,6 @@ import gov.wa.wsdot.apps.analytics.client.ClientFactory;
 import gov.wa.wsdot.apps.analytics.client.activities.coreViews.navigation.NavView;
 import gov.wa.wsdot.apps.analytics.client.activities.events.SetDateEvent;
 import gov.wa.wsdot.apps.analytics.client.activities.twitter.view.ranking.RankingView;
-import gov.wa.wsdot.apps.analytics.client.activities.twitter.view.search.SearchView;
 import gov.wa.wsdot.apps.analytics.client.activities.twitter.view.sentiment.SentimentPieChart;
 import gov.wa.wsdot.apps.analytics.client.activities.twitter.view.sources.SourcesPieChart;
 import gov.wa.wsdot.apps.analytics.client.activities.twitter.view.summary.SummaryChart;
@@ -79,9 +78,6 @@ public class TwitterViewImpl extends Composite implements TwitterView {
     TweetsView tweets;
 
     @UiField(provided = true)
-    SearchView searchResults;
-
-    @UiField(provided = true)
     RankingView ranking;
 
     private String[] accounts =
@@ -107,7 +103,6 @@ public class TwitterViewImpl extends Composite implements TwitterView {
 
         nav = new NavView(clientFactory, "home");
         tweets = new TweetsView(clientFactory);
-        searchResults = new SearchView(clientFactory);
         summaryChart = new SummaryChart(clientFactory);
         sentimentPieChart = new SentimentPieChart(clientFactory);
         sourcesPieChart = new SourcesPieChart(clientFactory);

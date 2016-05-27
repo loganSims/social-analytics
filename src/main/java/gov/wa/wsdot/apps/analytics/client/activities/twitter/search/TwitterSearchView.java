@@ -9,7 +9,13 @@ public interface TwitterSearchView extends IsWidget {
 
     void setPresenter(Presenter presenter);
 
-    public interface Presenter {
+    void search(String url);
+
+    interface Presenter {
+
+        void export();
+        String getUrl();
+        void makeUrl(String searchTerm, int searchType, String account, int media, String startDate, String endDate);
 
     }
 }
