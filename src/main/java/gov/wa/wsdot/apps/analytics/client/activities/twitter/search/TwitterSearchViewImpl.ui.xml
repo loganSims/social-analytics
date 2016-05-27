@@ -46,7 +46,7 @@
                         </m:MaterialColumn>
 
                         <m:MaterialColumn grid="s3 m2" paddingTop="30" paddingLeft="30">
-                            <m:MaterialCheckBox ui:field="mediaOnly"  text="Content with media only" value="false" type="FILLED"/>
+                            <m:MaterialCheckBox ui:field="mediaOnly"  text="Media only" value="false" type="FILLED"/>
                         </m:MaterialColumn>
 
                     </m:MaterialRow>
@@ -73,7 +73,7 @@
 
 
                 <m:MaterialRow >
-                <m:MaterialColumn grid="s4">
+                <m:MaterialColumn grid="s12 m6 l4">
                     <g:HTMLPanel ui:field="searchList">
                         <g:HTMLPanel ui:field="searchDetails"/>
                     </g:HTMLPanel>
