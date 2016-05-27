@@ -37,9 +37,9 @@ public class AppActivityMapper implements ActivityMapper {
     public Activity getActivity(Place place) {
         if (place instanceof TwitterPlace)
             return new TwitterActivity((TwitterPlace) place, clientFactory);
-        if (place instanceof TwitterSearchPlace)
+        else if (place instanceof TwitterSearchPlace)
             return new TwitterSearchActivity((TwitterSearchPlace) place, clientFactory);
 
-        return null;
+        return new TwitterActivity((TwitterPlace) place, clientFactory);
     }
 }

@@ -1,14 +1,6 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
              xmlns:g="urn:import:com.google.gwt.user.client.ui"
-             xmlns:m="urn:import:gwt.material.design.client.ui"
-             xmlns:m.html="urn:import:gwt.material.design.client.ui.html"
-             xmlns:views.summary="urn:import:gov.wa.wsdot.apps.analytics.client.activities.twitter.view.summary"
-             xmlns:views.sentiment="urn:import:gov.wa.wsdot.apps.analytics.client.activities.twitter.view.sentiment"
-             xmlns:views.tweets="urn:import:gov.wa.wsdot.apps.analytics.client.activities.twitter.view.tweets"
-             xmlns:views.sources="urn:import:gov.wa.wsdot.apps.analytics.client.activities.twitter.view.sources"
-             xmlns:views.search="urn:import:gov.wa.wsdot.apps.analytics.client.activities.twitter.view.search"
-             xmlns:views.ranking="urn:import:gov.wa.wsdot.apps.analytics.client.activities.twitter.view.ranking"
              xmlns:core.nav="urn:import:gov.wa.wsdot.apps.analytics.client.activities.coreViews.navigation">
 
     <ui:with field="res" type="gov.wa.wsdot.apps.analytics.client.resources.Resources" />

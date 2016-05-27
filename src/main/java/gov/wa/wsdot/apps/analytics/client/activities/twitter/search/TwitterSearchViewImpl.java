@@ -27,7 +27,7 @@ public class TwitterSearchViewImpl extends Composite implements TwitterSearchVie
 
     public TwitterSearchViewImpl(ClientFactory clientFactory) {
         eventBinder.bindEventHandlers(this, clientFactory.getEventBus());
-        nav = new NavView(clientFactory);
+        nav = new NavView(clientFactory, "search");
         initWidget(uiBinder.createAndBindUi(this));
     }
 

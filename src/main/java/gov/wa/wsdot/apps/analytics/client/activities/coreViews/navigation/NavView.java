@@ -6,16 +6,17 @@ import com.google.gwt.place.shared.Place;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
-import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.web.bindery.event.shared.binder.EventBinder;
 import gov.wa.wsdot.apps.analytics.client.ClientFactory;
+import gov.wa.wsdot.apps.analytics.client.activities.events.GoToEvent;
 import gov.wa.wsdot.apps.analytics.client.activities.twitter.home.TwitterPlace;
 import gov.wa.wsdot.apps.analytics.client.activities.twitter.search.TwitterSearchPlace;
 import gov.wa.wsdot.apps.analytics.client.resources.Resources;
 import gwt.material.design.client.ui.MaterialImage;
 import gwt.material.design.client.ui.MaterialLink;
+import gwt.material.design.client.ui.MaterialToast;
 
 
 public class NavView extends Composite{
@@ -42,7 +43,7 @@ public class NavView extends Composite{
 
     ClientFactory clientFactory;
 
-    public NavView(ClientFactory clientFactory) {
+    public NavView(ClientFactory clientFactory, String here) {
 
         eventBinder.bindEventHandlers(this, clientFactory.getEventBus());
 
@@ -50,30 +51,25 @@ public class NavView extends Composite{
 
         this.clientFactory = clientFactory;
 
-        Place here = clientFactory.getPlaceController().getWhere();
-        if (here instanceof TwitterPlace){
+        if (here.equalsIgnoreCase("home")){
             home.setTextColor("blue");
             home.setIconColor("blue");
-        }else if (here instanceof TwitterSearchPlace){
+        }else if (here.equalsIgnoreCase("search")){
             search.setTextColor("blue");
             search.setIconColor("blue");
         }
 
-
         logo.setResource(Resources.INSTANCE.tacronymWhiteLogoPNG());
         logo.addStyleName(Resources.INSTANCE.css().logo());
-
     }
 
     @UiHandler("home")
     public void onHomeClick(ClickEvent e){
-
-        clientFactory.getPlaceController().goTo(new TwitterPlace("main"));
+        clientFactory.getEventBus().fireEvent(new GoToEvent(new TwitterPlace("main")));
     }
 
     @UiHandler("search")
     public void onSearchClick(ClickEvent e){
-        clientFactory.getPlaceController().goTo(new TwitterSearchPlace("main"));
+        clientFactory.getEventBus().fireEvent(new GoToEvent(new TwitterSearchPlace("main")));
     }
-
 }

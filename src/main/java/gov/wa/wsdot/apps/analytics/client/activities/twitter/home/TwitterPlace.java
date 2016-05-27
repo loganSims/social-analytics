@@ -33,7 +33,7 @@ public class TwitterPlace extends Place {
     }
 
     @Prefix("TwitterHome")
-    public static class TwitterPlaceTokenizer implements PlaceTokenizer<TwitterPlace> {
+    public static class Tokenizer implements PlaceTokenizer<TwitterPlace> {
 
         @Override
         public String getToken(TwitterPlace place) {

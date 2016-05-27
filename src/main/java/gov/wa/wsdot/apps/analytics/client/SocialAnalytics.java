@@ -21,25 +21,21 @@ import com.google.gwt.activity.shared.ActivityManager;
 import com.google.gwt.activity.shared.ActivityMapper;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.logical.shared.ValueChangeEvent;
-import com.google.gwt.event.logical.shared.ValueChangeHandler;
-import com.google.gwt.event.shared.EventBus;
+
+import com.google.web.bindery.event.shared.EventBus;
 import com.google.gwt.place.shared.Place;
 import com.google.gwt.place.shared.PlaceController;
 import com.google.gwt.place.shared.PlaceHistoryHandler;
-import com.google.gwt.user.client.History;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.SimplePanel;
 import gov.wa.wsdot.apps.analytics.client.activities.twitter.home.TwitterPlace;
-import gov.wa.wsdot.apps.analytics.client.activities.twitter.search.TwitterSearchPlace;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
  */
 public class SocialAnalytics implements EntryPoint {
 
-  private Place defaultPlace;
+  private Place defaultPlace = new TwitterPlace("main");
   private SimplePanel appWidget = new SimplePanel();
 
   @Override
@@ -47,7 +43,7 @@ public class SocialAnalytics implements EntryPoint {
 
       ClientFactory clientFactory = GWT.create(ClientFactory.class);
       EventBus eventBus = clientFactory.getEventBus();
-      final PlaceController placeController = clientFactory.getPlaceController();
+      PlaceController placeController = clientFactory.getPlaceController();
 
       // Start ActivityManager for the twitter widget with our ActivityMapper
       ActivityMapper activityMapper = new AppActivityMapper(clientFactory);
@@ -57,33 +53,10 @@ public class SocialAnalytics implements EntryPoint {
       // Start PlaceHistoryHandler with our PlaceHistoryMapper
       AppPlaceHistoryMapper historyMapper= GWT.create(AppPlaceHistoryMapper.class);
       PlaceHistoryHandler historyHandler = new PlaceHistoryHandler(historyMapper);
-
-      if (Window.Location.getHash().equals("#TwitterSearch")){
-          Place defaultPlace = new TwitterSearchPlace("main");
-      }else{
-          Place defaultPlace = new TwitterPlace("main");
-      }
-
       historyHandler.register(placeController, eventBus, defaultPlace);
 
-      History.addValueChangeHandler(new ValueChangeHandler<String>() {
-          public void onValueChange(ValueChangeEvent<String> event) {
-              String historyToken = event.getValue();
-              // Parse the history token
-              try {
-                  if (historyToken.equals("TwitterSearch")){
-                      placeController.goTo(new TwitterSearchPlace("TwitterSearch"));
-                  }else{
-                      placeController.goTo(defaultPlace);
-                  }
-              } catch (IndexOutOfBoundsException e) {
-                placeController.goTo(defaultPlace);
-              }
-          }
-      });
-
       RootPanel.get().add(appWidget);
-
+      // Goes to the place represented on URL else default place
       historyHandler.handleCurrentHistory();
 
   }

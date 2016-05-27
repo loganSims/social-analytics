@@ -20,13 +20,9 @@ package gov.wa.wsdot.apps.analytics.client.activities.twitter.home;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
-import com.google.gwt.i18n.client.DateTimeFormat;
-import com.google.gwt.jsonp.client.JsonpRequestBuilder;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
-import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.web.bindery.event.shared.binder.EventBinder;
@@ -40,8 +36,6 @@ import gov.wa.wsdot.apps.analytics.client.activities.twitter.view.sentiment.Sent
 import gov.wa.wsdot.apps.analytics.client.activities.twitter.view.sources.SourcesPieChart;
 import gov.wa.wsdot.apps.analytics.client.activities.twitter.view.summary.SummaryChart;
 import gov.wa.wsdot.apps.analytics.client.activities.twitter.view.tweets.TweetsView;
-import gov.wa.wsdot.apps.analytics.shared.TweetTimes;
-import gov.wa.wsdot.apps.analytics.util.Consts;
 import gwt.material.design.client.ui.*;
 
 import java.util.Date;
@@ -105,13 +99,13 @@ public class TwitterViewImpl extends Composite implements TwitterView {
                    "wsferries"};
 
     private Presenter presenter;
+    private ClientFactory clientFactory;
 
     public TwitterViewImpl(ClientFactory clientFactory) {
 
         eventBinder.bindEventHandlers(this, clientFactory.getEventBus());
 
-        nav = new NavView(clientFactory);
-
+        nav = new NavView(clientFactory, "home");
         tweets = new TweetsView(clientFactory);
         searchResults = new SearchView(clientFactory);
         summaryChart = new SummaryChart(clientFactory);
@@ -119,10 +113,11 @@ public class TwitterViewImpl extends Composite implements TwitterView {
         sourcesPieChart = new SourcesPieChart(clientFactory);
         ranking = new RankingView(clientFactory);
 
+        this.clientFactory = clientFactory;
+
         initWidget(uiBinder.createAndBindUi(this));
 
         accountPicker.setItemSelected(4, true);
-        getStartDate();
     }
 
     @Override
@@ -161,33 +156,6 @@ public class TwitterViewImpl extends Composite implements TwitterView {
     @UiHandler("submitDateButton")
     protected void onClick(ClickEvent click){
         presenter.onDateSubmit(dpStart.getDate(), dpEnd.getDate(), accounts[accountPicker.getSelectedIndex()]);
-    }
-
-    private void getStartDate(){
-
-        String url = Consts.HOST_URL + "/summary/startTime";
-
-        JsonpRequestBuilder jsonp = new JsonpRequestBuilder();
-        // Set timeout for 30 seconds (30000 milliseconds)
-        jsonp.setTimeout(30000);
-        jsonp.requestObject(url, new AsyncCallback<TweetTimes>() {
-
-            @Override
-            public void onFailure(Throwable caught) {
-                Window.alert("Failure: " + caught.getMessage());
-            }
-
-            @Override
-            public void onSuccess(TweetTimes result) {
-                // Fire SetDateEvent to change date picker to default date from server
-                DateTimeFormat dateTimeFormat = DateTimeFormat.getFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
-                Date startDate = dateTimeFormat.parse(result.getStartDate());
-                Date endDate = dateTimeFormat.parse(result.getEndDate());
-
-                presenter.getEventBus().fireEvent(new SetDateEvent(startDate, endDate));
-
-            }
-        });
     }
 }
 

@@ -8,7 +8,7 @@
     <g:HTMLPanel>
     <m:MaterialRow>
         <m:MaterialColumn grid="s12">
-            <m:MaterialTab ui:field="tab" backgroundColor="teal lighten-2" indicatorColor="yellow">
+            <m:MaterialTab ui:field="tab" backgroundColor="teal lighten-2">
 
                 <m:MaterialTabItem waves="LIGHT" grid="s4">
                     <m:MaterialLink ui:field="likeTab" text="Popular" href="#best" textColor="white"/>

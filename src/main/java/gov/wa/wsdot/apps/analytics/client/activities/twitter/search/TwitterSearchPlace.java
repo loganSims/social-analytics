@@ -4,9 +4,6 @@ import com.google.gwt.place.shared.Place;
 import com.google.gwt.place.shared.PlaceTokenizer;
 import com.google.gwt.place.shared.Prefix;
 
-/**
- * Created by simsl on 5/26/16.
- */
 public class TwitterSearchPlace extends Place {
     private String TwitterSearchName;
 
@@ -17,8 +14,9 @@ public class TwitterSearchPlace extends Place {
     public String getTwitterSearchName() {
         return TwitterSearchName;
     }
+
     @Prefix("TwitterSearch")
-    public static class SearchPlaceTokenizer implements PlaceTokenizer<TwitterSearchPlace> {
+    public static class Tokenizer implements PlaceTokenizer<TwitterSearchPlace> {
         @Override
         public String getToken(TwitterSearchPlace place) {
             return place.getTwitterSearchName();

@@ -23,6 +23,6 @@ import gov.wa.wsdot.apps.analytics.client.activities.twitter.home.TwitterPlace;
 import gov.wa.wsdot.apps.analytics.client.activities.twitter.search.TwitterSearchPlace;
 
 
-@WithTokenizers({TwitterPlace.TwitterPlaceTokenizer.class, TwitterSearchPlace.SearchPlaceTokenizer.class})
+@WithTokenizers({TwitterPlace.Tokenizer.class, TwitterSearchPlace.Tokenizer.class})
 public interface AppPlaceHistoryMapper extends PlaceHistoryMapper {
 }
